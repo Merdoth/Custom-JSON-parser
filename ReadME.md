@@ -2,6 +2,12 @@
 
 A complete JSON parser built from scratch using ES6 JavaScript.
 
+A JSON parser has two main jobs:
+
+** Lexer (Tokenizer) which reads raw text character-by-character, and groups characters into tokens like: {, }, :, "string", true, 123 (Think of it as cutting words out of a sentence).
+
+** Parser which takes tokens, checks if they follow JSON grammar rules, and builds a JavaScript object (Think of it as checking if the sentence makes sense).
+
 ## Features
 - Step-by-step implementation following the challenge requirements
 - Full ES6 syntax (classes, arrow functions, modules)
