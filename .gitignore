@@ -1,0 +1,25 @@
+
+### **3. `.gitignore`**
+```gitignore
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs
+lib/
+dist/
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test downloads
+tests/download/

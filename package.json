@@ -1,0 +1,32 @@
+{
+  "name": "custom-json-parser",
+  "version": "1.0.0",
+  "description": "A JSON parser implementation in ES6",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "json-parser": "./bin/json-parser.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node scripts/test-runner.js",
+    "test:step1": "node scripts/test-runner.js --step=1",
+    "test:step2": "node scripts/test-runner.js --step=2",
+    "test:step3": "node scripts/test-runner.js --step=3",
+    "test:step4": "node scripts/test-runner.js --step=4",
+    "test:custom": "node scripts/test-runner.js --custom",
+    "benchmark": "node scripts/benchmark.js",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write \"src/**/*.js\""
+  },
+  "keywords": ["json", "parser", "compiler", "educational"],
+  "author": "Your Name",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  }
+}
