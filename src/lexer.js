@@ -86,6 +86,19 @@ export function tokenize(input) {
       continue;
     }
 
+     // Arrays and Nested Objects
+    if (char === "[") {
+      tokens.push({ type: "LBRACKET", value: "[" });
+      i++;
+      continue;
+    }
+
+    if (char === "]") {
+      tokens.push({ type: "RBRACKET", value: "]" });
+      i++;
+      continue;
+    }
+    
     throw new Error(`Unexpected character: ${char}`);
   }
 

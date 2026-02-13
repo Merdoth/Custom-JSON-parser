@@ -1,4 +1,3 @@
-
 export function parse(tokens) {
   let position = 0;
 
@@ -6,7 +5,7 @@ export function parse(tokens) {
     const token = tokens[position];
 
     if (!token || token.type !== type) {
-      throw new Error(`Expected ${type}`);
+      throw new Error(`Expected ${type} but got ${token?.type}`);
     }
 
     position++;
@@ -40,16 +39,24 @@ export function parse(tokens) {
       return null;
     }
 
-    throw new Error("Invalid value");
+    if (token.type === "LBRACE") {
+      return parseObject();
+    }
+
+    if (token.type === "LBRACKET") {
+      return parseArray();
+    }
+
+    throw new Error(`Invalid value: ${token.type}`);
   }
 
-  function parseObj() {
+  function parseObject() {
     const obj = {};
 
     expect("LBRACE");
 
     // Handle empty object {}
-    if (tokens[position].type === "RBRACE") {
+    if (tokens[position]?.type === "RBRACE") {
       expect("RBRACE");
       return obj;
     }
@@ -58,21 +65,53 @@ export function parse(tokens) {
       const key = expect("STRING").value;
       expect("COLON");
 
-      const value = parseValue(); // ✅ USE parseValue
+      const value = parseValue();
       obj[key] = value;
 
-      // If comma → continue
       if (tokens[position]?.type === "COMMA") {
         expect("COMMA");
         continue;
       }
 
-      break; // no comma → done
+      break;
     }
 
     expect("RBRACE");
     return obj;
   }
 
-  return parseObj();
+  function parseArray() {
+    const arr = [];
+
+    expect("LBRACKET");
+
+    // Handle empty array []
+    if (tokens[position]?.type === "RBRACKET") {
+      expect("RBRACKET");
+      return arr;
+    }
+
+    while (true) {
+      const value = parseValue();
+      arr.push(value);
+
+      if (tokens[position]?.type === "COMMA") {
+        expect("COMMA");
+        continue;
+      }
+
+      break;
+    }
+
+    expect("RBRACKET");
+    return arr;
+  }
+
+  const result = parseValue();
+
+  if (position !== tokens.length) {
+    throw new Error("Unexpected extra tokens after valid JSON");
+  }
+
+  return result;
 }
