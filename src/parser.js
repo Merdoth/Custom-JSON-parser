@@ -13,32 +13,66 @@ export function parse(tokens) {
     return token;
   }
 
+  function parseValue() {
+    const token = tokens[position];
+
+    if (!token) {
+      throw new Error("Unexpected end of input");
+    }
+
+    if (token.type === "STRING") {
+      position++;
+      return token.value;
+    }
+
+    if (token.type === "NUMBER") {
+      position++;
+      return token.value;
+    }
+
+    if (token.type === "BOOLEAN") {
+      position++;
+      return token.value;
+    }
+
+    if (token.type === "NULL") {
+      position++;
+      return null;
+    }
+
+    throw new Error("Invalid value");
+  }
+
   function parseObj() {
     const obj = {};
 
-    // JSON must start with {
     expect("LBRACE");
 
+    // Handle empty object {}
     if (tokens[position].type === "RBRACE") {
       expect("RBRACE");
       return obj;
     }
 
-    const key = expect('STRING').value;
-    expect("COLON");
-    
-    // For simplicity, we only support string values in this example
-    const value = expect('STRING').value;
-    obj[key] = value;
+    while (true) {
+      const key = expect("STRING").value;
+      expect("COLON");
+
+      const value = parseValue(); // ✅ USE parseValue
+      obj[key] = value;
+
+      // If comma → continue
+      if (tokens[position]?.type === "COMMA") {
+        expect("COMMA");
+        continue;
+      }
+
+      break; // no comma → done
+    }
 
     expect("RBRACE");
     return obj;
   }
-
-  // // No extra tokens allowed
-  // if (position !== tokens.length) {
-  //   throw new Error("Unexpected tokens after JSON end");
-  // }
 
   return parseObj();
 }

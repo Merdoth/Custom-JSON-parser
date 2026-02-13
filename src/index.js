@@ -3,7 +3,7 @@ import { parse } from "./parser.js";
 
 
 // const input = "{}";
-const input = '{"key":"value"}';
+const input = '{"key":"value", "mee":"3"}';
 
 
 try {
