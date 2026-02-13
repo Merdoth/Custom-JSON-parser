@@ -24,14 +24,6 @@ npm install
 
 ## Usage
 ```bash
-# Parse a JSON file
-node src/index.js path/to/file.json
-
-# Pipe JSON via stdin
-echo '{"key": "value"}' | node src/index.js
-
-# Use as CLI tool (after npm link)
-json-parser file.json
 
 # Run all tests
 npm test
