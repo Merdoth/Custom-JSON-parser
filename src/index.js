@@ -1,8 +1,10 @@
-import { tokenize } from "./lexer";
-import { parse } from "./parser";
+import { tokenize } from "./lexer.js";
+import { parse } from "./parser.js";
 
 
-const input = {};
+// const input = "{}";
+const input = '{"key":"value"}';
+
 
 try {
   const tokens = tokenize(input);
