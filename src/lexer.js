@@ -56,14 +56,15 @@ export function tokenize(input) {
     }
 
     // Numbers
-    if (/0-9/.test(char)) {
+    if (/[0-9]/.test(char)) {
       let num = "";
 
-      while (/0-9/.test(input[i])) {
+      while (/[0-9]/.test(input[i])) {
         num += input[i];
         i++;
       }
       tokens.push({ type: "NUMBER", value: Number(num)});
+      continue;
     }
 
     // Booleans
