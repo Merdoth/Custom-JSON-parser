@@ -4,17 +4,30 @@
   "description": "A JSON parser implementation in ES6",
   "type": "module",
   "main": "src/index.js",
+  "author": "Merdoth",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:step1": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/step1.test.js",
+    "test:step2": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/step2.test.js",
+    "test:custom": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/custom.test.js"
   },
-  "keywords": ["json", "parser", "compiler", "educational"],
-  "author": "Your Name",
-  "license": "MIT",
+  "keywords": [
+    "json",
+    "parser",
+    "compiler",
+    "educational"
+  ],
+   "jest": {
+    "testEnvironment": "node"
+  },
   "engines": {
     "node": ">=14.0.0"
   },
   "devDependencies": {
     "eslint": "^8.0.0",
+    "jest": "^30.2.0",
     "prettier": "^3.0.0"
-  }
+  },
+  "license": "MIT"
 }
